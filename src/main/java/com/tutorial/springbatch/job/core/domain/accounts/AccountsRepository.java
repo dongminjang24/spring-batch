@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface AccountsRepository  extends JpaRepository<Accounts, Integer> {
+public interface AccountsRepository  extends JpaRepository<Accounts, Long> {
 
 
 }

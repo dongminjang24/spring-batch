@@ -1,3 +1,11 @@
+# default configuration
+spring:
+  profiles:
+    active: local
+
+
+
+---
 spring:
   batch:
     jdbc:
@@ -5,6 +13,8 @@ spring:
     job:
       enabled: true
       name: ${job.name:NONE}
+
+
 
   datasource:
     url: jdbc:mysql://localhost:3306/spring_batch?useSSL=false&serverTimezone=UTC
@@ -21,4 +31,37 @@ logging:
   level:
     org.springframework.batch: DEBUG
     com.tutorial.springbatch: TRACE
+    org.hibernate.SQL: DEBUG
+
+---
+spring:
+
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: H2
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: true
+
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org.springframework.batch: DEBUG
+    com.tutorial.springbatch: DEBUG
     org.hibernate.SQL: DEBUG
