@@ -1,11 +1,14 @@
 package com.tutorial.springbatch.job.ValidatedParam;
 
+import java.util.List;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.job.CompositeJobParametersValidator;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
@@ -29,9 +32,16 @@ public class ValidatedParamJobConfig {
 	public Job validatedParamJob(JobRepository jobRepository, Step validatedParamStep) {
 		return new JobBuilder("validatedParamJob", jobRepository)
 			.incrementer(new RunIdIncrementer())
-			.validator(new FileParamValidator())
+			.validator(multipleValidator())
 			.start(validatedParamStep)
 			.build();
+	}
+
+	// 하나가 아닌 여러개의 validator 사용
+	private CompositeJobParametersValidator multipleValidator() {
+		CompositeJobParametersValidator validator = new CompositeJobParametersValidator();
+		validator.setValidators(List.of(new FileParamValidator()));
+		return validator;
 	}
 
 	@JobScope
