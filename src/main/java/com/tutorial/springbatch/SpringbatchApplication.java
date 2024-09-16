@@ -10,4 +10,6 @@ public class SpringbatchApplication {
 		SpringApplication.run(SpringbatchApplication.class, args);
 	}
 
+
 }
+

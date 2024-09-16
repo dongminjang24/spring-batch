@@ -1,0 +1,24 @@
+spring:
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: true
+      name: ${job.name:NONE}
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring_batch?useSSL=false&serverTimezone=UTC
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+logging:
+  level:
+    org.springframework.batch: DEBUG
+    com.tutorial.springbatch: TRACE
+    org.hibernate.SQL: DEBUG
