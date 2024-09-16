@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MultipleStepJobConfig {
 
+
 	@Bean
 	public Job multipleStepJob(JobRepository jobRepository, Step multipleStep1, Step multipleStep2,Step multipleStep3) {
 		return new JobBuilder("multipleStepJob", jobRepository)
